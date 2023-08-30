@@ -5,14 +5,23 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title><?php bloginfo('name') ?></title>
 	<link href="<?= get_template_directory_uri() ?>/assets/css/styles.min.css" rel="stylesheet">
-	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="<?= get_template_directory_uri() ?>/assets/js/main.js"></script>
+
+	<?php
+	// style
+	wp_enqueue_style('font-awesome', 'https://use.fontawesome.com/releases/v5.6.1/css/all.css');
+
+	// script
+	// 前提 wp_register_script('jquery', 'jqueryパス');
+	wp_enqueue_script('jquery');
+	wp_enqueue_script('bistro-calme-main', get_template_directory_uri() .'/assets/js/main.js', [], filemtime(get_template_directory() . '/assets/js/main.js'));
+	
+	wp_head();
+	?>
 </head>
 
 <body <?php body_class() ?>>
+	<?php wp_body_open() ?>
 	<header class="header">
 		<div class="header_inner">
 			<div class="header_logo">
