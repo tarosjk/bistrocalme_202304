@@ -14,8 +14,8 @@
 	// script
 	// 前提 wp_register_script('jquery', 'jqueryパス');
 	wp_enqueue_script('jquery');
-	wp_enqueue_script('bistro-calme-main', get_template_directory_uri() .'/assets/js/main.js', [], filemtime(get_template_directory() . '/assets/js/main.js'));
-	
+	wp_enqueue_script('bistro-calme-main', get_template_directory_uri() . '/assets/js/main.js', [], filemtime(get_template_directory() . '/assets/js/main.js'));
+
 	wp_head();
 	?>
 </head>
@@ -32,21 +32,20 @@
 				<p><?php bloginfo('description') ?></p>
 			</div>
 
-			<form class="header_search">
-				<input type="text" placeholder="キーワードを入力">
-				<i class="fas fa-search"></i>
-			</form>
+			<?php get_search_form() ?>
 		</div>
 
 		<div class="header_links">
 			<nav class="gnav">
-				<ul class="">
-					<li><a href="#">HOME</a></li>
-					<li><a href="#">わたしたちについて</a></li>
-					<li><a href="#">アクセス</a></li>
-					<li><a href="#">最新情報</a></li>
-					<li><a href="#">お問い合わせ</a></li>
-				</ul>
+				<?php
+				$args = [
+					'menu' => 'global-navigation',
+					'container' => '',
+					'menu_class' => '',
+				];
+				wp_nav_menu($args);
+
+				?>
 			</nav>
 
 			<ul class="header_sns">
