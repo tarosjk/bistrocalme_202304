@@ -1,15 +1,17 @@
-<?php 
-/*
-固定ページのコンテンツを取得する方法
-（ブロックエディタでコンテンツ部を作成しない場合）
+<?php get_header() ?>
 
-ヘッダー
+<?php if (have_posts()) : ?>
+	<?php while (have_posts()) : the_post(); ?>
+		<h2 class="pageTitle"><?php the_title() ?><span><?= strtoupper($post->post_name) ?></span></h2>
 
-ページのスラッグを取得
-$slug = $post->post_name;
+		<main class="main">
+			<div class="container">
+				<div class="content">
+					<?php the_content() ?>
+				</div>
+			</div>
+		</main>
+	<?php endwhile; ?>
+<?php endif; ?>
 
-コンテンツ
-get_template_part('template-parts/page', $slug)
-
-フッター
-*/
+<?php get_footer() ?>
