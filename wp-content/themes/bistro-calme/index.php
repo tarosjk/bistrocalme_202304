@@ -24,6 +24,14 @@
 					<?php endif; ?>
 
 				</div>
+
+				<?php
+				if (function_exists('wp_pagenavi')) {
+					wp_pagenavi();
+				}
+
+				// the_posts_pagination();
+				?>
 			</div>
 
 			<div class="col-12 col-md-3">

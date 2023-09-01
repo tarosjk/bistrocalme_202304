@@ -20,6 +20,15 @@
 			<?php endif; ?>
 
 		</div>
+		<?php
+		if (function_exists('wp_pagenavi')) {
+			wp_pagenavi([
+				'options' => [
+					'pages_text' => '⭐️'
+				]
+			]);
+		}
+		?>
 	</div>
 
 </main>
