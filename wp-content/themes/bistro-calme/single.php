@@ -24,6 +24,8 @@
 								<div class="content">
 									<?php the_content() ?>
 								</div>
+
+								<?php comments_template() ?>
 							</div>
 
 							<div class="postLinks">
@@ -41,6 +43,7 @@
 			</div>
 
 			<div class="col-12 col-md-3">
+				<?php get_sidebar('latests') ?>
 				<?php get_sidebar('categories') //sidebar-categories.php 
 				?>
 				<?php get_sidebar('archives') ?>
