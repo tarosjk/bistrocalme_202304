@@ -1,11 +1,21 @@
 <?php
 
-// titleタグを出力する
-add_theme_support('title-tag');
-// アイキャッチ画像を有効化する
-add_theme_support('post-thumbnails');
-// カスタムメニュー機能を使用可能にする
-add_theme_support('menus');
+add_action('after_setup_theme', 'my_theme_support');
+function my_theme_support()
+{
+  // titleタグを出力する
+  add_theme_support('title-tag');
+
+  // アイキャッチ画像を有効化する
+  add_theme_support('post-thumbnails');
+
+  // カスタムメニュー機能を使用可能にする
+  add_theme_support('menus');
+
+  // エディタースタイルを有効化する
+  add_theme_support('editor-styles');
+  add_editor_style('assets/css/editor-style.css');
+}
 
 add_filter('document_title_separator', 'my_document_title_separator');
 function my_document_title_separator()
