@@ -86,3 +86,46 @@ remove_action('shutdown', 'wp_ob_end_flush_all', 1);
 add_action('shutdown', function () {
   while (@ob_end_flush()); //@はエラーをミュートする演算子
 });
+
+// REST APIにメニューのカスタムフィールドの情報を含める
+add_action('rest_api_init', 'api_register_fields');
+function api_register_fields()
+{
+  register_rest_field('menu', 'custom_fields', [
+    'get_callback' => 'get_custom_field',
+    'update_callback' => null,
+    'schema' => null,
+  ]);
+}
+
+function get_custom_field()
+{
+  // return get_post_meta();
+  return get_post_custom();
+}
+
+
+// ショートコード（テスト）
+add_shortcode('test', 'shortcode_test');
+function shortcode_test()
+{
+  return '「ショートコードのテストです」';
+}
+
+// ショートコード（りんご数）
+// [apple color="red" num="5" origin="青森"]
+// $attsの中身 ['color'=> 'red', 'num' => '5', 'origin' => '青森']
+add_shortcode('apple', 'shortcode_apple');
+function shortcode_apple($atts)
+{
+  $atts = shortcode_atts(
+    [
+      'color' => '赤',
+      'num' => 0,
+      'origin' => '青森',
+    ],
+    $atts,
+    'apple'
+  );
+  return "<p>{$atts['origin']}産の、{$atts['color']}色のりんごが{$atts['num']}個あります。</p>";
+}
