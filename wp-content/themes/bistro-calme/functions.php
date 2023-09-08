@@ -1,5 +1,8 @@
 <?php
 
+// 別ファイルのロード
+get_template_part('includes/mw_wp_form');
+
 add_action('after_setup_theme', 'my_theme_support');
 function my_theme_support()
 {
@@ -34,16 +37,6 @@ function my_document_title_parts($title)
 
   return $title;
 }
-
-// MW WP Formカスタマイズ
-function my_error_message($error, $key, $rule)
-{
-  if ($key === 'fullname' && $rule === 'noempty') {
-    return 'お名前が入力されておらぬぞ';
-  }
-  return $error;
-}
-add_filter('mwform_error_message_mw-wp-form-52', 'my_error_message', 10, 3);
 
 // お問い合わせページで自動的にPが挿入されるのを防ぐ
 add_action('pre_get_posts', function () {
@@ -128,4 +121,51 @@ function shortcode_apple($atts)
     'apple'
   );
   return "<p>{$atts['origin']}産の、{$atts['color']}色のりんごが{$atts['num']}個あります。</p>";
+}
+
+// HTML共通化ショートコード
+add_shortcode('price', 'shortcode_price');
+function shortcode_price($atts, $content = null)
+{
+  return "<div class=\"wrap\"><em>価格</em>: {$content}</div>";
+}
+
+// URLを出力するショートコード
+add_shortcode('dir_url', 'shortcode_url_img');
+function shortcode_url_img()
+{
+  return get_template_directory_uri() . '/assets/img/';
+}
+
+
+/**
+ * サムネイル（アイキャッチ画像）を出力する関数
+ * 
+ * アイキャッチ画像が存在しているとそれを出力し、無い場合はNo image 画像を出力する
+ * @param string|array $test 引数の説明
+ */
+function display_thumbnail()
+{
+  if (has_post_thumbnail()) {
+    the_post_thumbnail();
+  } else {
+    $img_url = get_template_directory_uri();
+    echo "<img src=\"{$img_url}/assets/img/common/noimage_600x400.png\" alt=\"\">";
+  }
+}
+
+/**
+ * メニュー画像の取得を行う
+ * 
+ * ACFで作成したメニューの画像を取得する
+ * 
+ * @param string $size 画像のサイズをキーワードで指定。'thumbnail','medium','large','full'など。
+ */
+function display_image($size = 'large')
+{
+  $pic = get_field('pic');
+  if (!empty($pic)) {
+    $pic_url = $pic['sizes'][$size];
+    echo "<img src=\"{$pic_url}\" alt=\"\">";
+  }
 }

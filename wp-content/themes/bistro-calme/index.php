@@ -11,7 +11,7 @@
 				<?php if (is_month()) : ?>
 					<h2 class="main_title"><?php the_time('Y年n月') ?></h2>
 				<?php else : ?>
-					<h2 class="main_title"><?php wp_title('') ?></h2>
+					<h2 class="main_title"><?= single_cat_title(); ?></h2>
 				<?php endif; ?>
 				<div class="row">
 

@@ -1,11 +1,7 @@
 <article id="post-<?php the_ID() ?>" <?php post_class('news') ?>>
   <div class="news_pic">
     <a href="<?php the_permalink() ?>">
-      <?php if (has_post_thumbnail()) : ?>
-        <?php the_post_thumbnail() ?>
-      <?php else : ?>
-        <img src="<?= get_template_directory_uri() ?>/assets/img/common/noimage_600x400.png" alt="">
-      <?php endif; ?>
+      <?php display_thumbnail() ?>
     </a>
   </div>
   <div class="news_meta">
