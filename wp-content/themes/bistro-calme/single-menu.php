@@ -4,6 +4,16 @@
 
 <?php get_template_part('template-parts/breadcrumb') ?>
 
+<img src="<?= do_shortcode('[dir_url]'); ?>common/logo.png" alt="">
+
+<p>
+  <?php $my_functions->display_hello(); ?>
+</p>
+
+<p>
+  <?= do_shortcode('[test]'); ?>
+</p>
+
 <main class="main">
   <section class="sec">
     <div class="container">
@@ -18,11 +28,7 @@
 
           <div class="col-12 col-md-6">
             <div class="article_pic">
-              <?php
-              $pic = get_field('pic');
-              $pic_url = $pic['sizes']['large'];
-              ?>
-              <img src="<?= $pic_url ?>" alt="">
+              <?php display_image(); ?>
             </div>
           </div>
         </div>
