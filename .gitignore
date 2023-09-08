@@ -4,7 +4,11 @@ wp-includes
 /wp-*.php
 /xmlrpc.php
 wp-content/languages
-wp-content/plugins
+wp-content/plugins/**
+!wp-content/plugins/my-functions
+!wp-content/plugins/my-functions/**
+!wp-content/plugins/search-word-highlight
+!wp-content/plugins/search-word-highlight/**
 wp-content/themes/**
 !wp-content/themes/bistro-calme
 !wp-content/themes/bistro-calme/**
